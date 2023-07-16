@@ -4,20 +4,21 @@ import "./App.css";
 import SpecificBook from "./components/SpecificBook";
 import Signin from "./components/Signin";
 import BookList from "./components/BookList";
-import Layout from "./components/Layout";
 import Cart from "./components/Cart";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
 
 function App() {
   return (
     <BrowserRouter>
+      <Header />
       <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<BookList />} />
-          <Route path="signin" element={<Signin />} />
-          <Route path={`specific-book/:id`} element={<SpecificBook />} />
-          <Route path="cart" element={<Cart />} />
-        </Route>
+        <Route index element={<BookList />} />
+        <Route path="signin" element={<Signin />} />
+        <Route path="specific-book/:bookId" element={<SpecificBook />} />
+        <Route path="cart" element={<Cart />} />
       </Routes>
+      <Footer />
     </BrowserRouter>
   );
 }

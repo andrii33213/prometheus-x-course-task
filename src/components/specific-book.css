@@ -1,0 +1,8 @@
+.specific-book {
+    margin: 0 35px;
+}
+
+.specific-book-container {
+    width: 60%;
+    display: flex;
+}

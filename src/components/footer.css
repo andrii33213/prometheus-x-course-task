@@ -1,0 +1,25 @@
+.footer {
+    display: flex;
+    height: 80px;
+    background-color: rgb(206, 206, 206);
+    justify-content: center;
+    align-items: center;
+    border-top: 3px solid rgb(80, 80, 80);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.container {
+    font-weight: 500;
+    color: black;
+}
+
+.link {
+    text-decoration: none;
+    font-weight: bold;
+    color: rgb(43, 43, 252)
+}
+
+.link:hover {
+    color: rgb(0, 0, 255);
+}

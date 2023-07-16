@@ -1,45 +1,50 @@
 import React from "react-dom";
 import { Link } from "react-router-dom";
-import data from "../books.json";
-import SpecificBook from "./SpecificBook";
+import DATA from "../books.json";
+import "./book-list.css";
 
 function BookList() {
-  const books = data.books;
-  const template = books.map((book) => {
-    return (
-      <div key={book.id}>
-        <div>
-          <img
-            src={
-              book.image
-                ? book.image
-                : require("../media/images/imageNotFound.png")
-            }
-            alt={book.title}
-          />
-        </div>
-        <h3>{book.title}</h3>
-        <span>{book.author}</span>
-        <p>Price: {book.price}</p>
-        <Link
-          to={{
-            pathname: `/specific-book/:id`,
-            propsBook: book,
-          }}
-        >
-          <input type="submit" value="View" />
-        </Link>
-      </div>
-    );
-  });
+  const books = DATA.books;
   return (
-    <div>
-      <input type="text" placeholder="Search by book name" />
-      <p>Price</p>
-      <input type="number" placeholder="From:" />
-      <input type="number" placeholder="To:" />
-      {template}
-    </div>
+    <main className="container">
+      <div className="filter-container">
+        <input
+          className="filter-input"
+          type="text"
+          placeholder="Search by book name"
+        />
+        <div className="filter-price-container">
+          <p>Price:</p>
+          <input className="filter-input" type="number" placeholder="From:" />
+          <input className="filter-input" type="number" placeholder="To:" />
+        </div>
+      </div>
+      <div className="book-list">
+        {books.map((book) => {
+          return (
+            <div className="book-container" key={book.id}>
+              <div className="book-image-container">
+                <img
+                  className="book-image"
+                  src={
+                    book.image || require("../media/images/imageNotFound.png")
+                  }
+                  alt={book.title}
+                />
+              </div>
+              <h3 className="book-title">{book.title}</h3>
+              <span className="book-author">Author: {book.author}</span>
+              <div className="bottom-container">
+                <p>Price: {book.price}$</p>
+                <Link className="view-link" to={`/specific-book/${book.id}`}>
+                  View
+                </Link>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </main>
   );
 }
 
