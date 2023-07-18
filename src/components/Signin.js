@@ -1,20 +1,54 @@
+import { useState } from "react";
 import React from "react-dom";
+import "./signin.css";
+import { LocalStorageService, LS_KEYS } from "../services/localStorage";
+import { useNavigate } from "react-router-dom";
+import "./signin.css";
 
 export default function Signin() {
+  const [disabled, setDisabled] = useState(true);
+  const [username, setUsername] = useState();
+  const navigate = useNavigate();
+  function handleChange(e) {
+    if (e.target.value.length < 4 || e.target.value.length > 16) {
+      setDisabled(true);
+    } else {
+      setDisabled(false);
+      setUsername(e.target.value);
+    }
+  }
+
+  function handleClick() {
+    LocalStorageService.set(LS_KEYS.USERNAME, username);
+    LocalStorageService.set(LS_KEYS.LOGGEDIN, true);
+    LocalStorageService.set(LS_KEYS.CART);
+    navigate("/books");
+  }
+
   return (
-    <div>
-      <div>
-        <img alt="Avatar" src={require("../media/images/avatar.png")} />
+    <div className="sign-in">
+      <div className="avatar-container">
+        <img alt="Avatar" src={require("../media/images/avatar2.png")} />
       </div>
-      <form>
-        <label htmlFor="username">Username</label>
+      <form className="sign-in-container">
+        <label className="sign-in-label" htmlFor="username">
+          Username
+        </label>
         <input
+          className="sign-in-input"
           type="text"
           placeholder="type Username"
           id="username"
           name="username"
+          onChange={handleChange}
         />
-        <button>Sign-in</button>
+        <button
+          className="sign-in-button"
+          disabled={disabled}
+          onClick={handleClick}
+        >
+          Sign-in
+        </button>
       </form>
     </div>
   );

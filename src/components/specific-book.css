@@ -1,8 +1,95 @@
 .specific-book {
-    margin: 0 35px;
+    margin: 0 50px;
+}
+
+.navigate-btn {
+    font-size: 15px;
+    margin-bottom: 40px;
+    border: none;
+    font-weight: 600;
+    background-color: white;
+    color: rgb(0, 0, 171);
+    transition: color 0.3s;
+}
+
+.navigate-btn:hover {
+    cursor: pointer;
+    color: rgb(0, 0, 255);
+    text-decoration: underline;
 }
 
 .specific-book-container {
-    width: 60%;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 400px 400px minmax(150px, 1fr);
+    margin-bottom: 50px;
+}
+
+.specific-book-image-container {
+    max-width: 400px;
+    height: 400px;
     display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 40px;
+}
+
+.specific-book-image {
+    height: 100%;
+    width: 100%;
+    size: 100%;
+}
+
+.specific-book-info {
+    padding: 0 40px 0 0;
+}
+
+.specific-book-title {
+    color: black;
+}
+
+.specific-book-price-form {
+    display: flex;
+    flex-direction: column;
+    padding: 25px;
+    border: 2px dashed black;
+    height: fit-content;
+}
+
+.specific-book-price-form-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 14px;
+    align-items: center;
+}
+
+.specific-book-count-price {
+    width: 50px;
+    height: 25px;
+    border: 2px solid black;
+    border-radius: 5px;
+}
+
+.add-to-cart-input {
+    margin-top: 120px;
+    width: 100px;
+    height: 30px;
+    border-radius: 6px;
+    font-weight: bold;
+    align-self: end;
+}
+
+.specific-book-description-container {
+    width: 60%;
+    margin-bottom: 70px;
+}
+
+.specific-book-description-container>h3 {
+    font-size: 35px;
+    margin-bottom: 10px;
+}
+
+.specific-book-description-container>p {
+    font-size: 18px;
+    margin-top: 0;
 }

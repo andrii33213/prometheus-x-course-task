@@ -6,7 +6,12 @@ export default function Footer() {
     <footer className="footer">
       <p className="container">
         Виконано в{" "}
-        <a className="link" href="https://prometheus.org.ua/">
+        <a
+          className="link"
+          href="https://prometheus.org.ua/"
+          target="_blank"
+          rel="noreferrer"
+        >
           Prometheus
         </a>
         © 2023

@@ -13,8 +13,8 @@ function App() {
     <BrowserRouter>
       <Header />
       <Routes>
-        <Route index element={<BookList />} />
-        <Route path="signin" element={<Signin />} />
+        <Route index element={<Signin />} />
+        <Route path="books" element={<BookList />} />
         <Route path="specific-book/:bookId" element={<SpecificBook />} />
         <Route path="cart" element={<Cart />} />
       </Routes>

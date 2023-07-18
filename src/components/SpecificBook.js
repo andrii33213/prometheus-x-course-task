@@ -7,7 +7,6 @@ import "./specific-book.css";
 export default function SpecificBook() {
   const navigate = useNavigate();
   const { bookId } = useParams();
-  const { pathname } = useLocation();
 
   const specificBook = DATA.books.find((book) => book.id === parseInt(bookId));
 
@@ -38,45 +37,65 @@ export default function SpecificBook() {
 
   return (
     <main className="specific-book">
-      <button onClick={() => navigate("/")}>Back to books</button>
+      <button className="navigate-btn" onClick={() => navigate("/")}>
+        ← Back to books
+      </button>
 
       <div className="specific-book-container">
-        <img
-          alt={title}
-          src={image || require("../media/images/imageNotFound.png")}
-        />
-        <div>
-          <h2>{title}</h2>
+        <div className="specific-book-image-container">
+          <img
+            className="specific-book-image"
+            alt={title}
+            src={image || require("../media/images/imageNotFound.png")}
+          />
+        </div>
+        <div className="specific-book-info">
+          <h2 className="specific-book-title">{title}</h2>
           <p>
-            Author: <span>{author}</span>
+            Author: <b>{author}</b>
           </p>
           <p>
-            Level: <span>{level}</span>
+            Level: <b>{level}</b>
           </p>
           <p>
             Tags:
             {tags.map((tag) => (
-              <span>{tag}</span>
+              <b> {tag} </b>
             ))}
           </p>
         </div>
+        <div className="specific-book-price-form">
+          <div className="specific-book-price-form-item">
+            <span>Price, $</span>
+            <span>{price}</span>
+          </div>
+          <div className="specific-book-price-form-item">
+            <span>Count</span>
+            <input
+              className="specific-book-count-price"
+              type="number"
+              value={count}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="specific-book-price-form-item">
+            <span>Total price</span>
+            <span>{Math.round(count * price * 100) / 100}</span>
+          </div>
+          <input
+            className="add-to-cart-input"
+            type="submit"
+            value="Add to card"
+          />
+        </div>
       </div>
-      <div>
-        <div>
-          <span>Price, $</span>
-          <span>{price}</span>
-        </div>
-        <div>
-          <span>Count</span>
-          <input type="number" value={count} onChange={handleChange} />
-        </div>
-        <div>
-          <span>Total price</span>
-          <span>{Math.round(count * price * 100) / 100}</span>
-        </div>
-        <input type="submit" value="Add to card" />
+      <div className="specific-book-description-container">
+        <h3>Description</h3>
+        <p>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          {description}
+        </p>
       </div>
-      <p>{description}</p>
     </main>
   );
 }
