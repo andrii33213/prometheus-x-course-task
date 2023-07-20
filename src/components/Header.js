@@ -1,15 +1,22 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Cart from "./Cart";
 import cartImage from "../media/images/cart.svg";
 import "./header.css";
 import { LS_KEYS, LocalStorageService } from "../services/localStorage";
 
 export default function Header() {
+  const navigate = useNavigate();
+  function signOut() {
+    LocalStorageService.removeAll();
+    navigate("/");
+    window.location.reload(true);
+  }
+
   return (
     <header className="header">
       <h1 className="brand">JS BRAND STORE / Andrii Dubinko</h1>
-      {LocalStorageService.get("loggedIn") ? (
+      {LocalStorageService.get("username") ? (
         <div className="right-container">
           <Link className="cart" to="/cart">
             <img
@@ -18,8 +25,8 @@ export default function Header() {
               src={require("../media/images/cart.svg").default}
             />
           </Link>
-          <button className="btn">
-            <Link to="/">Sign in</Link>
+          <button onClick={signOut} className="btn">
+            <Link to="/">Sign Out</Link>
           </button>
           <div className="user">
             <img
