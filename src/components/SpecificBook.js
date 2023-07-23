@@ -1,8 +1,14 @@
 import { useEffect, useState } from "react";
 import React from "react-dom";
 import DATA from "../books.json";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import {
+  Navigate,
+  useLocation,
+  useNavigate,
+  useParams,
+} from "react-router-dom";
 import "./specific-book.css";
+import { LocalStorageService } from "../services/localStorage";
 
 export default function SpecificBook() {
   const navigate = useNavigate();
@@ -35,67 +41,97 @@ export default function SpecificBook() {
     }
   }
 
-  return (
-    <main className="specific-book">
-      <button className="navigate-btn" onClick={() => navigate("/")}>
-        ← Back to books
-      </button>
+  function handleClick(e) {
+    const cart = LocalStorageService.get("cart");
+    if (cart === null) {
+      LocalStorageService.set("cart", { id: bookId, count: count });
+    } else {
+      // for (let i = 0; i < cart.length; i++){
 
-      <div className="specific-book-container">
-        <div className="specific-book-image-container">
-          <img
-            className="specific-book-image"
-            alt={title}
-            src={image || require("../media/images/imageNotFound.png")}
-          />
-        </div>
-        <div className="specific-book-info">
-          <h2 className="specific-book-title">{title}</h2>
-          <p>
-            Author: <b>{author}</b>
-          </p>
-          <p>
-            Level: <b>{level}</b>
-          </p>
-          <p>
-            Tags:
-            {tags.map((tag) => (
-              <b> {tag} </b>
-            ))}
-          </p>
-        </div>
-        <div className="specific-book-price-form">
-          <div className="specific-book-price-form-item">
-            <span>Price, $</span>
-            <span>{price}</span>
-          </div>
-          <div className="specific-book-price-form-item">
-            <span>Count</span>
-            <input
-              className="specific-book-count-price"
-              type="number"
-              value={count}
-              onChange={handleChange}
+      // }
+      cart.forEach((element) => {
+        if (element.id === bookId) {
+          LocalStorageService.remove(element);
+          LocalStorageService.set("cart", [
+            ...LocalStorageService.get("cart"),
+            { id: bookId, count: count },
+          ]);
+        } else {
+          LocalStorageService.set("cart", [
+            ...LocalStorageService.get("cart"),
+            { id: bookId, count: count },
+          ]);
+        }
+      });
+    }
+  }
+
+  if (!LocalStorageService.get("username")) {
+    return <Navigate replace to="/" />;
+  } else {
+    return (
+      <main className="specific-book">
+        <button className="navigate-btn" onClick={() => navigate("/books")}>
+          ← Back to books
+        </button>
+
+        <div className="specific-book-container">
+          <div className="specific-book-image-container">
+            <img
+              className="specific-book-image"
+              alt={title}
+              src={image || require("../media/images/imageNotFound.png")}
             />
           </div>
-          <div className="specific-book-price-form-item">
-            <span>Total price</span>
-            <span>{Math.round(count * price * 100) / 100}</span>
+          <div className="specific-book-info">
+            <h2 className="specific-book-title">{title}</h2>
+            <p>
+              Author: <b>{author}</b>
+            </p>
+            <p>
+              Level: <b>{level}</b>
+            </p>
+            <p>
+              Tags:
+              {tags.map((tag) => (
+                <b> {tag} </b>
+              ))}
+            </p>
           </div>
-          <input
-            className="add-to-cart-input"
-            type="submit"
-            value="Add to card"
-          />
+          <div className="specific-book-price-form">
+            <div className="specific-book-price-form-item">
+              <span>Price, $</span>
+              <span>{price}</span>
+            </div>
+            <div className="specific-book-price-form-item">
+              <span>Count</span>
+              <input
+                className="specific-book-count-price"
+                type="number"
+                value={count}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="specific-book-price-form-item">
+              <span>Total price</span>
+              <span>{Math.round(count * price * 100) / 100}</span>
+            </div>
+            <input
+              className="add-to-cart-input"
+              type="submit"
+              value="Add to card"
+              onClick={handleClick}
+            />
+          </div>
         </div>
-      </div>
-      <div className="specific-book-description-container">
-        <h3>Description</h3>
-        <p>
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          {description}
-        </p>
-      </div>
-    </main>
-  );
+        <div className="specific-book-description-container">
+          <h3>Description</h3>
+          <p>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            {description}
+          </p>
+        </div>
+      </main>
+    );
+  }
 }

@@ -48,7 +48,7 @@
     display: flex;
     flex-wrap: wrap;
     width: 100%;
-    justify-content: space-around;
+    justify-content: start;
 }
 
 .book-container {

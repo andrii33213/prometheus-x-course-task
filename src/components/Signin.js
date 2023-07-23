@@ -20,7 +20,7 @@ export default function Signin() {
 
   function handleClick() {
     LocalStorageService.set(LS_KEYS.USERNAME, username);
-    LocalStorageService.set(LS_KEYS.CART);
+    LocalStorageService.set(LS_KEYS.CART, null);
     navigate("/books");
     window.location.reload(true);
   }
