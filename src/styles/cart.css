@@ -2,17 +2,24 @@
     display: flex;
     flex-direction: column;
     margin: 20px;
+    background-color: rgb(255, 226, 189);
+    padding: 30px;
 }
 
 .cart-book-container {
+    background-color: rgb(255, 184, 90);
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 10px;
-    border: 2px solid black;
+    border: 2px solid rgb(169, 104, 20);
     border-radius: 10px;
     font-weight: 700;
     margin-bottom: 10px;
+}
+
+.cart-book-container * {
+    color: rgb(126, 64, 13);
 }
 
 .cart-book-left-container {
@@ -37,7 +44,7 @@
 }
 
 .cart-book-price-for-one {
-    width: 250px;
+    width: 200px;
 }
 
 .cart-book-price {
@@ -50,23 +57,35 @@
     display: flex;
     margin-top: 30px;
     padding: 10px;
-    justify-content: end;
+    justify-content: flex-end;
     align-items: center;
 }
 
 .purchase-container>p {
-    color: black;
+    color: rgb(126, 64, 13);
     font-size: 20px;
     margin-right: 50px;
 }
 
 .purchase-container>button {
-    color: black;
+    background-color: rgb(255, 123, 0);
+    color: white;
+    border: none;
+    transition: background-color 0.3s;
+    border-radius: 10px;
     font-size: 16px;
     font-weight: 700;
     height: 40px;
     width: 100px;
     margin-right: 40px;
+}
+
+.purchase-container>button:disabled {
+    background-color: rgba(255, 123, 0, 70%);
+}
+
+.purchase-container>button {
+    background-color: rgb(255, 93, 5);
 }
 
 .cart-empty {
@@ -82,6 +101,45 @@
 }
 
 .cart-empty>p {
+    color: rgb(126, 64, 13);
     font-size: 25px;
     font-weight: 700;
 }
+
+@media (max-width: 767px) {
+
+    .cart-container {
+        padding: 5px;
+    }
+
+    .cart-image-container {
+        display: none;
+    }
+
+    .cart-book-container>* {
+        font-size: 12px;
+    }
+
+    .cart-book-title {
+        width: 250px;
+        margin-right: 20px;
+    }
+
+    .cart-book-price-for-one {
+        display: none;
+    }
+
+    .cart-book-price {
+        width: 80px;
+    }
+}
+
+@media (min-width: 767px) and (max-width: 991px) {
+    .cart-image-container {
+        display: none;
+    }
+}
+
+@media (min-width: 991px) and (max-width: 1199px) {}
+
+@media (min-width: 1200px) {}

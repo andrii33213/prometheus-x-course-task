@@ -1,9 +1,8 @@
 import { useState } from "react";
 import React from "react-dom";
-import "./signin.css";
 import { LocalStorageService, LS_KEYS } from "../services/localStorage";
 import { Navigate, useNavigate } from "react-router-dom";
-import "./signin.css";
+import "../styles/signin.css";
 
 export default function Signin() {
   const [disabled, setDisabled] = useState(true);

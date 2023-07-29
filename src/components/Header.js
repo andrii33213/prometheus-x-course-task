@@ -1,9 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import Cart from "./Cart";
-import cartImage from "../media/images/cart.svg";
-import "./header.css";
-import { LS_KEYS, LocalStorageService } from "../services/localStorage";
+import { LocalStorageService } from "../services/localStorage";
+import "../styles/header.css";
 
 export default function Header() {
   const navigate = useNavigate();
@@ -15,7 +13,7 @@ export default function Header() {
 
   return (
     <header className="header">
-      <h1 className="brand">JS BRAND STORE / Andrii Dubinko</h1>
+      <h1 className="brand">X-course task / Dubinko Andrii</h1>
       {LocalStorageService.get("username") ? (
         <div className="right-container">
           <Link className="cart" to="/cart">

@@ -1,14 +1,12 @@
 import React from "react-dom";
-import { Link, redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import DATA from "../books.json";
-import "./book-list.css";
 import { useState } from "react";
 import { LocalStorageService } from "../services/localStorage";
-import { useNavigate } from "react-router-dom";
 import { Navigate } from "react-router-dom";
+import "../styles/book-list.css";
 
 function BookList() {
-  const navigate = useNavigate();
   const books = DATA.books;
 
   const [filterValue, setFilterValue] = useState("");
@@ -48,15 +46,17 @@ function BookList() {
               book.title.toLowerCase().includes(filterValue.toLowerCase())
             )
             .filter(function (book) {
+              let result;
               if (filterPriceValue === "all") {
-                return 0 < book.price && book.price <= Number.MAX_VALUE;
+                result = 0 < book.price && book.price <= Number.MAX_VALUE;
               } else if (filterPriceValue === "<15") {
-                return 0 < book.price && book.price <= 15;
+                result = 0 < book.price && book.price <= 15;
               } else if (filterPriceValue === "<30") {
-                return 15 < book.price && book.price <= 30;
+                result = 15 < book.price && book.price <= 30;
               } else if (filterPriceValue === "30<") {
-                return 30 < book.price && book.price <= Number.MAX_VALUE;
+                result = 30 < book.price && book.price <= Number.MAX_VALUE;
               }
+              return result;
             })
             .map((filteredBook) => {
               return (

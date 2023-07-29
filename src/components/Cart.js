@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { LocalStorageService } from "../services/localStorage";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import DATA from "../books.json";
-import "./cart.css";
+import "../styles/cart.css";
 
 function CartContent() {
   const data = DATA.books;
@@ -28,31 +28,28 @@ function CartContent() {
             let count = cart[books.indexOf(book)].count;
             let price = Math.round(book.price * count * 100) / 100;
             totalPrice += price;
-            console.log(count, price, totalPrice);
             return (
-              <>
-                <div className="cart-book-container">
-                  <div className="cart-book-left-container">
-                    <div className="cart-image-container">
-                      <img
-                        alt={book.title}
-                        src={
-                          book.image ||
-                          require("../media/images/imageNotFound.png")
-                        }
-                      />
-                    </div>
-                    <p className="cart-book-title">{book.title}</p>
-                    <p className="cart-book-price-for-one">
-                      Price for one: {book.price}$
-                    </p>
-                    <p className="cart-book-count">
-                      Count: {cart[books.indexOf(book)].count}
-                    </p>
+              <div key={book.id} className="cart-book-container">
+                <div className="cart-book-left-container">
+                  <div className="cart-image-container">
+                    <img
+                      alt={book.title}
+                      src={
+                        book.image ||
+                        require("../media/images/imageNotFound.png")
+                      }
+                    />
                   </div>
-                  <p className="cart-book-price">Price: {price}$</p>
+                  <p className="cart-book-title">{book.title}</p>
+                  <p className="cart-book-price-for-one">
+                    Price for one: {book.price}$
+                  </p>
+                  <p className="cart-book-count">
+                    Count: {cart[books.indexOf(book)].count}
+                  </p>
                 </div>
-              </>
+                <p className="cart-book-price">Price: {price}$</p>
+              </div>
             );
           })}
           <div className="purchase-container">
@@ -89,16 +86,19 @@ function CartContent() {
 }
 
 export default function Cart() {
-  const navigate = useNavigate();
-
   if (!LocalStorageService.get("username")) {
     return <Navigate replace to="/" />;
   } else {
     return (
       <main>
-        <button className="navigate-btn" onClick={() => navigate("/books")}>
+        <Link
+          style={{ marginLeft: "20px" }}
+          to="/books"
+          className="navigate-link"
+        >
           ← Back to books
-        </button>
+        </Link>
+
         <CartContent />
       </main>
     );

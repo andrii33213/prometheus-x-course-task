@@ -1,33 +1,17 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import React from "react-dom";
 import DATA from "../books.json";
-import {
-  Navigate,
-  useLocation,
-  useNavigate,
-  useParams,
-} from "react-router-dom";
-import "./specific-book.css";
+import { Link, Navigate, useParams } from "react-router-dom";
 import { LocalStorageService } from "../services/localStorage";
+import "../styles/specific-book.css";
 
 export default function SpecificBook() {
-  const navigate = useNavigate();
   const { bookId } = useParams();
 
   const specificBook = DATA.books.find((book) => book.id === parseInt(bookId));
 
-  const {
-    id,
-    author,
-    price,
-    image,
-    title,
-    level,
-    tags,
-    amount,
-    shortDescription,
-    description,
-  } = specificBook;
+  const { author, price, image, title, level, tags, amount, description } =
+    specificBook;
 
   const [count, setCount] = useState(1);
 
@@ -71,9 +55,9 @@ export default function SpecificBook() {
   } else {
     return (
       <main className="specific-book">
-        <button className="navigate-btn" onClick={() => navigate("/books")}>
+        <Link to="/books" className="navigate-link">
           ← Back to books
-        </button>
+        </Link>
 
         <div className="specific-book-container">
           <div className="specific-book-image-container">
@@ -86,22 +70,22 @@ export default function SpecificBook() {
           <div className="specific-book-info">
             <h2 className="specific-book-title">{title}</h2>
             <p>
-              Author: <b>{author}</b>
+              <b>Author:</b> {author}
             </p>
             <p>
-              Level: <b>{level}</b>
+              <b>Level:</b> {level}
             </p>
             <p>
-              Tags:
+              <b>Tags:</b>
               {tags.map((tag) => (
-                <b> {tag} </b>
+                <span key={tag}> {tag} </span>
               ))}
             </p>
           </div>
           <div className="specific-book-price-form">
             <div className="specific-book-price-form-item">
-              <span>Price, $</span>
-              <span>{price}</span>
+              <span>Price</span>
+              <span>{price}$</span>
             </div>
             <div className="specific-book-price-form-item">
               <span>Count</span>
@@ -109,12 +93,13 @@ export default function SpecificBook() {
                 className="specific-book-count-price"
                 type="number"
                 value={count}
+                id="counter"
                 onChange={handleChange}
               />
             </div>
             <div className="specific-book-price-form-item">
               <span>Total price</span>
-              <span>{Math.round(count * price * 100) / 100}</span>
+              <span>{Math.round(count * price * 100) / 100}$</span>
             </div>
             <input
               className="add-to-cart-input"
@@ -123,13 +108,13 @@ export default function SpecificBook() {
               onClick={handleClick}
             />
           </div>
-        </div>
-        <div className="specific-book-description-container">
-          <h3>Description</h3>
-          <p>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            {description}
-          </p>
+          <div className="specific-book-description-container">
+            <h3>Description</h3>
+            <p>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              {description}
+            </p>
+          </div>
         </div>
       </main>
     );
