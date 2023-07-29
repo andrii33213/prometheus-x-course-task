@@ -4,7 +4,7 @@ import "./footer.css";
 export default function Footer() {
   return (
     <footer className="footer">
-      <p className="container">
+      <p className="footer-container">
         Виконано в{" "}
         <a
           className="link"

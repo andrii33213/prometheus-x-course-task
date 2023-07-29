@@ -42,28 +42,28 @@ export default function SpecificBook() {
   }
 
   function handleClick(e) {
-    const cart = LocalStorageService.get("cart");
-    if (cart === null) {
-      LocalStorageService.set("cart", { id: bookId, count: count });
-    } else {
-      // for (let i = 0; i < cart.length; i++){
+    let cart = LocalStorageService.get("cart");
+    let isIdRepeated = undefined;
 
-      // }
-      cart.forEach((element) => {
-        if (element.id === bookId) {
-          LocalStorageService.remove(element);
-          LocalStorageService.set("cart", [
-            ...LocalStorageService.get("cart"),
-            { id: bookId, count: count },
-          ]);
+    if (cart !== null)
+      for (let i = 0; i < cart.length; i++) {
+        if (cart[i].id === +bookId) {
+          cart[i] = { id: +bookId, count: +count };
+          isIdRepeated = true;
+          break;
         } else {
-          LocalStorageService.set("cart", [
-            ...LocalStorageService.get("cart"),
-            { id: bookId, count: count },
-          ]);
+          isIdRepeated = false;
         }
-      });
+      }
+    else {
+      cart = [{ id: +bookId, count: +count }];
     }
+
+    if (isIdRepeated === false) {
+      cart = [...cart, { id: +bookId, count: +count }];
+    }
+
+    LocalStorageService.set("cart", cart);
   }
 
   if (!LocalStorageService.get("username")) {

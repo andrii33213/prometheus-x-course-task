@@ -2,7 +2,7 @@ import { useState } from "react";
 import React from "react-dom";
 import "./signin.css";
 import { LocalStorageService, LS_KEYS } from "../services/localStorage";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import "./signin.css";
 
 export default function Signin() {
@@ -25,31 +25,35 @@ export default function Signin() {
     window.location.reload(true);
   }
 
-  return (
-    <div className="sign-in">
-      <div className="avatar-container">
-        <img alt="Avatar" src={require("../media/images/avatar2.png")} />
-      </div>
-      <form className="sign-in-container">
-        <label className="sign-in-label" htmlFor="username">
-          Username
-        </label>
-        <input
-          className="sign-in-input"
-          type="text"
-          placeholder="type Username"
-          id="username"
-          name="username"
-          onChange={handleChange}
-        />
-        <button
-          className="sign-in-button"
-          disabled={disabled}
-          onClick={handleClick}
-        >
-          Sign-in
-        </button>
-      </form>
-    </div>
-  );
+  if (LocalStorageService.get("username")) {
+    return <Navigate replace to="books" />;
+  } else {
+    return (
+      <main className="sign-in">
+        <div className="avatar-container">
+          <img alt="Avatar" src={require("../media/images/avatar2.png")} />
+        </div>
+        <form className="sign-in-container">
+          <label className="sign-in-label" htmlFor="username">
+            Username
+          </label>
+          <input
+            className="sign-in-input"
+            type="text"
+            placeholder="type Username"
+            id="username"
+            name="username"
+            onChange={handleChange}
+          />
+          <button
+            className="sign-in-button"
+            disabled={disabled}
+            onClick={handleClick}
+          >
+            Sign-in
+          </button>
+        </form>
+      </main>
+    );
+  }
 }

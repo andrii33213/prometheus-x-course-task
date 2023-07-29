@@ -30,7 +30,7 @@ function BookList() {
             onChange={filterOnChange}
           />
           <div className="magnifier"></div>
-          <p>Price:</p>
+          <p className="filter-price-text">Price:</p>
           <select
             value={filterPriceValue}
             onChange={(e) => setFilterPriceValue(e.target.value)}
@@ -80,7 +80,7 @@ function BookList() {
                     Author: {filteredBook.author}
                   </span>
                   <div className="bottom-container">
-                    <p>Price: {filteredBook.price}$</p>
+                    <p className="book-price">Price: {filteredBook.price}$</p>
                     <Link
                       className="view-link"
                       to={`/specific-book/${filteredBook.id}`}

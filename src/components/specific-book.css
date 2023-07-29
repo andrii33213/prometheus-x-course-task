@@ -93,3 +93,9 @@
     font-size: 18px;
     margin-top: 0;
 }
+
+.popup {
+    background-color: black;
+    height: 100px;
+    width: 100px;
+}
