@@ -27,7 +27,6 @@ function BookList() {
             placeholder="Search by book name"
             onChange={filterOnChange}
           />
-          <div className="magnifier"></div>
           <p className="filter-price-text">Price:</p>
           <select
             value={filterPriceValue}
