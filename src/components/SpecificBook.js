@@ -93,7 +93,7 @@ export default function SpecificBook() {
                 className="specific-book-count-price"
                 type="number"
                 value={count}
-                id="counter"
+                data-testid="counter"
                 onChange={handleChange}
               />
             </div>
