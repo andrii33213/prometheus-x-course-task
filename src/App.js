@@ -1,5 +1,4 @@
-import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
-import logo from "./logo.svg";
+import { Routes, Route, Outlet } from "react-router-dom";
 import "./App.css";
 import SpecificBook from "./components/SpecificBook";
 import Signin from "./components/Signin";
@@ -21,17 +20,15 @@ function Layout() {
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index path="/" element={<Signin />} />
-          <Route path="books" element={<BookList />} />
-          <Route path="specific-book/:bookId" element={<SpecificBook />} />
-          <Route path="cart" element={<Cart />} />
-        </Route>
-        <Route path="*" element={<ErrorPage />} />
-      </Routes>
-    </BrowserRouter>
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        <Route index path="/" element={<Signin />} />
+        <Route path="books" element={<BookList />} />
+        <Route path="specific-book/:bookId" element={<SpecificBook />} />
+        <Route path="cart" element={<Cart />} />
+      </Route>
+      <Route path="*" element={<ErrorPage />} />
+    </Routes>
   );
 }
 
